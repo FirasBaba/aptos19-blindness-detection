@@ -83,12 +83,6 @@ valid_dataset = APTOSDataset(csv_file='../input/folds.csv',
                                    folds=val_folds,
                                    transform=val_transform)
 
-old_train_dataset = APTOSOldDataset(csv_file='../input/2015_data/trainLabels.csv',
-                                   root_dir='../input/2015_data/train/resized_train/',
-                                   image_size=IMAGE_SIZE,
-                                   transform=val_transform)
-
-
 
 train_dataset_loader = torch.utils.data.DataLoader(train_dataset,
                                                    batch_size=TRAINING_BATCH_SIZE,
@@ -100,23 +94,20 @@ valid_dataset_loader = torch.utils.data.DataLoader(valid_dataset,
                                                    shuffle=False,
                                                    num_workers=1)
 
-old_train_dataset_loader = torch.utils.data.DataLoader(old_train_dataset,
-                                                   batch_size=TEST_BATCH_SIZE,
-                                                   shuffle=False,
-                                                   num_workers=1)
+
 
 optimizer_ft = optim.Adam(model_ft.parameters(), lr=0.0001)
 lr_sch = lr_scheduler.ReduceLROnPlateau(optimizer_ft, verbose=True, factor=0.2, mode="max", patience=2, threshold=0.01)
 
 dataset_sizes = {}
 dataset_sizes["train"] = len(train_dataset)
-# dataset_sizes["val"] = len(valid_dataset)
-dataset_sizes["val"] = len(old_train_dataset)
+dataset_sizes["val"] = len(valid_dataset)
+# dataset_sizes["val"] = len(old_train_dataset)
 
 data_loader = {}
 data_loader["train"] = train_dataset_loader
-# data_loader["val"] = valid_dataset_loader
-data_loader["val"] = old_train_dataset_loader
+data_loader["val"] = valid_dataset_loader
+# data_loader["val"] = old_train_dataset_loader
 
 FOLD_NAME = "fold{0}".format(FOLD)
 model_ft = train_model(model_ft,
