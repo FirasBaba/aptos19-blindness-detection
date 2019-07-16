@@ -14,10 +14,11 @@ from tqdm import tqdm
 import torch.nn.functional as F
 from torch.autograd import Variable
 from loss_metric import kappa_metric
+from sklearn.metrics import mean_squared_error
 
 def train_model(model, data_loader, dataset_sizes, device, optimizer, scheduler, num_epochs, fold_name, ):
     since = time.time()
-    print("TRAIN based on best kappa metric")
+    print("TRAIN based on best loss metric")
     criterion = nn.MSELoss()
     #criterion = FocalLoss()
     best_model_wts = copy.deepcopy(model.state_dict())
@@ -86,7 +87,7 @@ def train_model(model, data_loader, dataset_sizes, device, optimizer, scheduler,
 
             epoch_loss = running_loss / dataset_sizes[phase]
             if phase == "val":
-                score = kappa_metric(valid_labels,valid_preds)
+                score = -mean_squared_error(valid_labels,valid_preds)
                 all_scores.append(score)
                 if score > best_score:
                     best_score = score

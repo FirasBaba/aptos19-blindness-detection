@@ -13,7 +13,8 @@ from PIL import Image
 
 from APTOSdataset import APTOSDataset,APTOSOldDataset
 from model import model_ft
-from train_loop import train_model
+# from train_loop import train_model
+from train_loop_bestloss import train_model
 from loss_metric import kappa_metric
 import cv2
 import albumentations
@@ -97,7 +98,7 @@ valid_dataset_loader = torch.utils.data.DataLoader(valid_dataset,
 
 
 optimizer_ft = optim.Adam(model_ft.parameters(), lr=0.0001)
-lr_sch = lr_scheduler.ReduceLROnPlateau(optimizer_ft, verbose=True, factor=0.2, mode="max", patience=2, threshold=0.01)
+lr_sch = lr_scheduler.ReduceLROnPlateau(optimizer_ft, verbose=True, factor=0.5, mode="max", patience=2, threshold=0.01)
 
 dataset_sizes = {}
 dataset_sizes["train"] = len(train_dataset)
