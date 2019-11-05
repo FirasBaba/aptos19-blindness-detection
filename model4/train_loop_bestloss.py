@@ -15,7 +15,7 @@ import torch.nn.functional as F
 from torch.autograd import Variable
 from loss_metric import kappa_metric
 from sklearn.metrics import mean_squared_error
-
+//bien 
 def train_model(model, data_loader, dataset_sizes, device, optimizer, scheduler, num_epochs, fold_name, ):
     since = time.time()
     print("TRAIN based on best loss metric")

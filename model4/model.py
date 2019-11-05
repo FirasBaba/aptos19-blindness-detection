@@ -5,7 +5,7 @@ import torch.nn as nn
 # import pretrainedmodels
 from efficientnet_pytorch import EfficientNet
 import os
-
+//commançant
 
 MODEL_NAME = os.environ["MODEL_NAME"]
 TRAINING_BATCH_SIZE = int(os.environ["TRAINING_BATCH_SIZE"])

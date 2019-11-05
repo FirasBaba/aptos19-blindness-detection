@@ -14,7 +14,7 @@ from tqdm import tqdm
 import torch.nn.functional as F
 from torch.autograd import Variable
 from loss_metric import kappa_metric
-
+//bien
 def train_model(model, data_loader, dataset_sizes, device, optimizer, scheduler, num_epochs, fold_name, ):
     since = time.time()
     print("TRAIN based on best kappa metric")
